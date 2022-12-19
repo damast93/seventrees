@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="seven trees in one, combinatorics, nuclear pennies">
+    <meta name="author" content="Dario Stein">
+    <title>Seven Trees in One</title>
+    <script type="text/javascript" src="trees.js"></script>
+    <script type="text/javascript" src="seventrees.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <h1>Seven Trees in One</h1>
+
+    <div class="textbox">
+        <p><a href="https://arxiv.org/abs/math/9405205">Famously</a>, we can take a single binary tree apart into seven such trees, in a one-to-one fashion.
+            Below, you can interactively explore <a href="http://blog.sigfpe.com/2007/09/arboreal-isomorphisms-from-nuclear.html">the construction.</a></p>
+        <p>
+            I have added colors to help you keep track of the operation of the algorithm: Nodes that you create
+            manually are highlighted in a specific color. Colorless nodes are created during the workings of the algorithm. Enjoy!
+        </p>
+    </div>
+
+    <div id="treeBox">
+        <svg id="canvas0" class="tree"></svg>
+        <span id='compDir'>ᐅ</span>
+        <svg id="canvas1" class="tree"></svg>
+        <svg id="canvas2" class="tree"></svg>
+        <svg id="canvas3" class="tree"></svg>
+        <svg id="canvas4" class="tree"></svg>
+        <svg id="canvas5" class="tree"></svg>
+        <svg id="canvas6" class="tree"></svg>
+        <svg id="canvas7" class="tree"></svg>
+    </div>
+
+    <script type="text/javascript">
+        const colors = ['black', 'red', 'green', 'blue', 'yellow', 'cyan', 'magenta', 'purple']
+
+        let canvases = [0, 1, 2, 3, 4, 5, 6, 7].map(n => document.getElementById(`canvas${n}`));
+        let treeControls = canvases.map(c => new TreeControl(c));
+
+        for (let i = 0; i <= 7; i++) {
+            treeControls[i].color = colors[i];
+        }
+
+
+        // set up events
+        canvas0.addEventListener('onTreeChange', () => {
+            let decomposed = oneToSeven(treeControls[0].tree);
+            for (let i = 1; i <= 7; i++) {
+                treeControls[i].tree = decomposed[i - 1];
+                compDir.innerHTML = "ᐅ";
+            }
+        });
+
+        for (var i = 1; i <= 7; i++) {
+            canvases[i].addEventListener('onTreeChange', () => {
+                let decomposed = treeControls.slice(1).map(c => c.tree);
+                treeControls[0].tree = sevenToOne(decomposed);
+                compDir.innerHTML = "ᐊ";
+            });
+        }
+
+        // Kick things off
+        var c = colors[0];
+        treeControls[0].tree = branch(leaf(c), branch(leaf(c), leaf(c), c));
+        canvas0.dispatchEvent(treeControls[0].onTreeChange);
+    </script>
+</body>
+
+</html>

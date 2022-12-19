@@ -1,0 +1,60 @@
+body {
+    font-family: helvetica;
+}
+
+
+h1 {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.textbox {
+    width: 40%;
+    margin: auto;
+}
+
+circle.leaf {
+    stroke: rebeccapurple;
+    stroke-width: 2;
+    fill: white;
+}
+
+circle.branch {
+    stroke: rebeccapurple;
+    stroke-width: 2;
+    fill: white;
+}
+
+circle.branch:hover {
+    stroke: red;
+    stroke-width: 4;
+}
+
+circle.leaf:hover {
+    stroke: lightgreen;
+    stroke-width: 4;
+}
+
+line.edge {
+    stroke:red;
+    stroke-width:2;
+}
+
+svg.tree {
+    /*border: 1px solid black;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#treeBox {
+    /*border: 1px solid purple;*/
+    padding: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#compDir {
+    font-size: 40px;
+}
