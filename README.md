@@ -63,7 +63,7 @@ let cmdsOneToSeven = [
 ]
 ```
 
-and translate this to the corresponding calls to `split` and `merge`. One small difficulty: At two points in the algorithms, there happen to be different ways a list of $n$ trees can arise (corresponding to having two pennies on the same position in the game). We need to keep these apart so we can process them correctly; we solve this by adding little tags to tree lists, and telling the functions on which tags they should operate (that's the optional `l,lt,tr` arguments). The tagged implementation of `split` and `merge  look like
+and translate this to the corresponding calls to `split` and `merge`. One small difficulty: At two points in the algorithms, there happen to be different ways a list of $n$ trees can arise (corresponding to having two pennies on the same position in the game). We need to keep these apart so we can process them correctly; we solve this by adding little tags to tree lists, and telling the functions on which tags they should operate (that's the optional `l,lt,tr` arguments). The tagged implementation of `split` and `merge` look like
 
 ```javascript
 function split(taggedtrees, n, t, tl, tr) {
